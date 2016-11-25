@@ -713,7 +713,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
 
         // FUNCTIONAL COMBINATORS: MAP
 
-        public virtual void MapInplace(Func<T, T> f, Zeros zeros = Zeros.AllowSkip)
+        public virtual void MapInplace(Func<T, T> f, Zeros zeros)
         {
             for (int i = 0; i < RowCount; i++)
             {
@@ -724,7 +724,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             }
         }
 
-        public virtual void MapIndexedInplace(Func<int, int, T, T> f, Zeros zeros = Zeros.AllowSkip)
+        public virtual void MapIndexedInplace(Func<int, int, T, T> f, Zeros zeros)
         {
             for (int i = 0; i < RowCount; i++)
             {
@@ -735,8 +735,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             }
         }
 
-        public void MapTo<TU>(MatrixStorage<TU> target, Func<T, TU> f,
-            Zeros zeros = Zeros.AllowSkip, ExistingData existingData = ExistingData.Clear)
+        public void MapTo<TU>(MatrixStorage<TU> target, Func<T, TU> f, Zeros zeros, ExistingData existingData)
             where TU : struct, IEquatable<TU>, IFormattable
         {
             if (target == null)
@@ -765,8 +764,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
             }
         }
 
-        public void MapIndexedTo<TU>(MatrixStorage<TU> target, Func<int, int, T, TU> f,
-            Zeros zeros = Zeros.AllowSkip, ExistingData existingData = ExistingData.Clear)
+        public void MapIndexedTo<TU>(MatrixStorage<TU> target, Func<int, int, T, TU> f, Zeros zeros, ExistingData existingData)
             where TU : struct, IEquatable<TU>, IFormattable
         {
             if (target == null)
@@ -798,7 +796,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
         public void MapSubMatrixIndexedTo<TU>(MatrixStorage<TU> target, Func<int, int, T, TU> f,
             int sourceRowIndex, int targetRowIndex, int rowCount,
             int sourceColumnIndex, int targetColumnIndex, int columnCount,
-            Zeros zeros = Zeros.AllowSkip, ExistingData existingData = ExistingData.Clear)
+            Zeros zeros, ExistingData existingData)
             where TU : struct, IEquatable<TU>, IFormattable
         {
             if (target == null)
@@ -879,7 +877,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
         // FUNCTIONAL COMBINATORS: FOLD
 
         /// <remarks>The state array will not be modified, unless it is the same instance as the target array (which is allowed).</remarks>
-        public void FoldByRow<TU>(TU[] target, Func<TU, T, TU> f, Func<TU, int, TU> finalize, TU[] state, Zeros zeros = Zeros.AllowSkip)
+        public void FoldByRow<TU>(TU[] target, Func<TU, T, TU> f, Func<TU, int, TU> finalize, TU[] state, Zeros zeros)
         {
             if (target == null)
             {
@@ -917,7 +915,7 @@ namespace MathNet.Numerics.LinearAlgebra.Storage
         }
 
         /// <remarks>The state array will not be modified, unless it is the same instance as the target array (which is allowed).</remarks>
-        public void FoldByColumn<TU>(TU[] target, Func<TU, T, TU> f, Func<TU, int, TU> finalize, TU[] state, Zeros zeros = Zeros.AllowSkip)
+        public void FoldByColumn<TU>(TU[] target, Func<TU, T, TU> f, Func<TU, int, TU> finalize, TU[] state, Zeros zeros)
         {
             if (target == null)
             {
